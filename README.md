@@ -49,10 +49,11 @@ al recibir la solicitud GET
             "/api/farmacia?lat=<latip>&long=<longip>
             
 el metodo .negociocercano se encargara de:
-	1.	guardar latitud y longitud en 2 variables
-	2.	pedir los registros totales a la base de datos
-	3.	enviar latitud,longitud y el array de negocios a la funcion getDistanciaMinima()
-	4.	retornar el negocio mas cercano en relacion a nuestra latitud y longitud de cliente.
+
+1.	guardar latitud y longitud en 2 variables
+2.	pedir los registros totales a la base de datos
+3.	enviar latitud,longitud y el array de negocios a la funcion getDistanciaMinima()
+4.	retornar el negocio mas cercano en relacion a nuestra latitud y longitud de cliente.
 Si enviamos una solicitud POST en
          
           "/api/farmacia" 
