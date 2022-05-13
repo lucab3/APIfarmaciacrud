@@ -7,8 +7,9 @@ const expect = require('chai').expect;
 chai.use(chaiHttp);
 const url= 'http://localhost:3000/api';
 
-
-// para ejecutar este test es preciso remplazar en routescontroller.guardado la response:
+//PRUEBA DE ESCRITURA por POST de una FARMACIA
+// para ejecutar este test es preciso remplazar en routescontroller.guardado el response:
+//res.redirect(url)
 // por res.send (200,'se inserto una farmacia')
 describe('insertar una farmacia: ',()=>{
 	it('deberia insertar una farmacia', (done) => {

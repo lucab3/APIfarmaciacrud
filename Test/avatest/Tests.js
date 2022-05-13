@@ -30,16 +30,3 @@ t.is(getDistanciaMinima(3.1,1.2,[{id:1,nombre:"farmacia1",ubicacion:"juan b just
 test ('la funcion calcula la distancia',(t)=>{
     t.is(getKilometers(1.2,3.2,1.2,3.1), 11.129507658317547)
 })
-
-// prueba POST CREATE
-
-test('post json object', async t => {
-	const body = {id: '1'};
-	t.deepEqual(await http.post('http://localhost:3000/api/farmacia', {body}), {id: '1'});
-});
-
-test('',async t => {
-	const body = {id: '1'};
-    url= 'http://localhost:3000/api/farmacia'
-	t.jsonContains(await post(url, {body}), {message: 'success'});
-});
