@@ -54,6 +54,7 @@ el metodo .negociocercano se encargara de:
 2.	pedir los registros totales a la base de datos
 3.	enviar latitud,longitud y el array de negocios a la funcion getDistanciaMinima()
 4.	retornar el negocio mas cercano en relacion a nuestra latitud y longitud de cliente.
+
 Si enviamos una solicitud POST en
          
           "/api/farmacia" 
