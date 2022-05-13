@@ -39,7 +39,8 @@ let routescontroller =  {
             longitud: req.body.longitud , 
            
         });
-        res.redirect("/api")
+        res.redirect("/api") 
+       
     },
 
 }
