@@ -1,64 +1,81 @@
-# APIfarmaciacrud
-Servicio API CRUD que permite obtener el negocio mas cercano a una ubicación de cliente y escribir registros de negocios en una base de datos
+API REST para Localización de Farmacias
+API REST que permite gestionar farmacias y encontrar la más cercana a una ubicación. Incluye operaciones CRUD completas y geolocalización.
 
-Para iniciar debemos instalar las dependencias de node_modules
+Características
+Buscar la farmacia más cercana a una ubicación
+Obtener todas las farmacias registradas
+Crear, actualizar y eliminar farmacias
+Documentación con Swagger
+Pruebas automatizadas
+Geolocalización por IP
+Requisitos
+Node.js (v12 o superior)
+MySQL (v5.7 o superior)
+Instalación
+Clonar este repositorio
+Instalar las dependencias:
+bash
+npm install
+Configurar la base de datos:
+Crear una base de datos MySQL
+Importar el archivo database/farmacias.sql
+Configurar las credenciales en config/config.js
+Iniciar el servidor:
+bash
+npm start
+El servidor estará disponible en http://localhost:3000
 
-Ejecutar en consola en nuestro proyecto
-     npm install 
+Documentación de la API
+La documentación de la API está disponible en formato Swagger en:
 
-# Base de datos
-La base de datos de pruebas se encuentra en la carpeta database/farmacias.sql, la cual es necesario importar en el administrador de base de datos a utilizar
+http://localhost:3000/api-docs
+Endpoints
+Farmacias
+GET /api - Obtiene la ubicación por IP y redirecciona a la farmacia más cercana
+GET /api/farmacias - Obtiene todas las farmacias
+GET /api/farmacia?lat=<lat>&lon=<lon> - Obtiene la farmacia más cercana a las coordenadas
+GET /api/farmacia/:id - Obtiene una farmacia por su ID
+POST /api/farmacia - Crea una nueva farmacia
+PUT /api/farmacia/:id - Actualiza una farmacia existente
+DELETE /api/farmacia/:id - Elimina una farmacia
+Ejemplo de uso
+Obtener la farmacia más cercana a una ubicación:
 
-# Servidor local:
-Es necesario configurar si se utiliza un servidor local para que el servcio mysql este escuchando en el puerto :3307
+bash
+curl -X GET "http://localhost:3000/api/farmacia?lat=30.3&lon=10.0"
+Crear una nueva farmacia:
 
-# Iniciando
-Para iniciar es necesario ejecutar npm start esperar a recibri el mensaje 'Servidor escuchando en puerto 3000'
+bash
+curl -X POST "http://localhost:3000/api/farmacia" \
+     -H "Content-Type: application/json" \
+     -d '{"nombre":"Farmacia Nueva","ubicacion":"Calle Principal 123","latitud":30.4,"longitud":10.1}'
+Pruebas
+Para ejecutar las pruebas:
 
-# Ruteador Express:
-URL,controlador
+bash
+npm test
+Tecnologías utilizadas
+Node.js
+Express
+MySQL
+Sequelize ORM
+Swagger
+Mocha/Chai (testing)
+GeoIP-lite (geolocalización)
+Estructura del proyecto
+.
+├── config/               # Configuración de la aplicación
+├── controllers/          # Controladores de la API
+├── database/             # Scripts de base de datos
+├── models/               # Modelos de datos
+├── Routes/               # Rutas de la API
+├── test/                 # Pruebas automatizadas
+├── .gitignore            # Archivos ignorados por Git
+├── CalculadorDistancia.js # Cálculo de distancia entre puntos
+├── DistanciaMinima.js    # Lógica para encontrar la farmacia más cercana
+├── index.js              # Punto de entrada de la aplicación
+├── package.json          # Dependencias y scripts
+└── README.md             # Documentación
+Licencia
+Este proyecto está bajo la Licencia MIT. Ver el archivo LICENSE para más detalles.
 
-# Solicitud GET
-    ("/api"), farmaciascontroller.index   
-
-    ("/api/farmacia?lat=numero &lon=numero") ,farmaciascontroller.negociocercano
-
-# Solicitud POST
-    ("/api/farmacia") , farmaciascontroller.guardado
-
-# Ejemplos de uso
-Si enviamos una solicitud GET a
-              
-                "/api" 
-obtendremos un redireccionamiento GET a
-        "/api/farmacia?lat=latip&lon=latip"
-pasandole en los argunemtos del query sring latip y lonip, la latitud y longitud obtenidas en base a la ip: "207.97.227.239", que se encuentra fija por testeo en un entorno local.
-Si utilizamos el servicio de manera remota podemos reemplazar esta variable por
-    let ip= 
-
-        req.headers['x-forwarded-for'] ||
-
-        req.connection.remoteAddress || 
-        
-        req.socket.remoteAddress || 
-        
-        req.connection.socket.remoteAddress;
-Asi obtendremos la ip del browser que realiza la solicitud
-al recibir la solicitud GET
-           
-            "/api/farmacia?lat=<latip>&long=<longip>
-            
-el metodo .negociocercano se encargara de:
-
-1.	guardar latitud y longitud en 2 variables
-2.	pedir los registros totales a la base de datos
-3.	enviar latitud,longitud y el array de negocios a la funcion getDistanciaMinima()
-4.	retornar el negocio mas cercano en relacion a nuestra latitud y longitud de cliente.
-
-Si enviamos una solicitud POST en
-         
-          "/api/farmacia" 
-que contenga un body respetando el modelo de:
-       
-        /models/farmacias.js
-en formato JSON obtendremos el agregado de un registro a nuestra base de datos farmacias.sql
