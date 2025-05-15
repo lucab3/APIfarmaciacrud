@@ -1,32 +1,49 @@
 {
-  "name": "apifarmaciacrud2",
+  "name": "api-farmacias",
   "version": "1.0.0",
-  "description": "",
+  "description": "API REST para localización de farmacias cercanas",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "mocha || true",
-    "ava:test": "ava"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "mocha ./test/mocha/**/*.js --exit",
+    "test:ava": "ava --verbose"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usuario/api-farmacias.git"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "farmacias",
+    "geolocalización",
+    "node",
+    "express",
+    "mysql",
+    "sequelize"
+  ],
+  "author": "Luca Belotti",
+  "license": "MIT",
   "dependencies": {
-    "ava-describe": "^2.0.0",
-    "ava-http": "^1.0.0",
-    "body-parser": "^1.20.0",
-    "chai": "^4.3.6",
-    "chai-http": "^4.3.0",
-    "express": "^4.18.1",
-    "express-generator": "^4.16.1",
-    "generator": "^1.0.1",
-    "geoip-lite": "^1.4.5",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "geoip-lite": "^1.4.2",
+    "http-errors": "^1.8.0",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
-    "nodemon": "^2.0.16",
-    "sequelize": "^6.19.0",
-    "supertest": "^6.2.3"
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "ava": "^4.2.0"
+    "ava": "^3.15.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   }
 }
