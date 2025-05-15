@@ -1,12 +1,27 @@
-getKilometers = function (latcliente,longcliente,latfarmacia,longfarmacia){
-    rad = function (x) {return x*Math.PI/180;}
-    var R= 6378.137; //radio de la tierra en km
-    var dLat = rad (latfarmacia-latcliente);
-    var dLong = rad (longfarmacia - longcliente);
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(latcliente)) * 
-    Math.cos(rad(latfarmacia)) * Math.sin(dLong/2) *Math.sin(dLong/2);
-    var c = 2 * Math.atan2 (Math.sqrt(a), Math.sqrt (1-a));
-    var d = R * c;
-    return d
+let getKilometers = require('./CalculadorDistancia')
+
+function getDistanciaMinima(lat, lon, arrayNegocios) {
+  let latitud = lat
+  let longitud = lon
+  let Negocios = arrayNegocios
+  let min = Infinity
+  let negocioMasCerca = null
+  
+  for (let i = 0; i < arrayNegocios.length; i++) {
+    let distancia = getKilometers(latitud, longitud, Negocios[i].latitud, Negocios[i].longitud)
+    
+    if (distancia < min) {
+      min = distancia
+      negocioMasCerca = Negocios[i]
+    }
+  }
+  
+  // Agregar la distancia calculada al objeto de respuesta
+  if (negocioMasCerca) {
+    negocioMasCerca.distancia = min.toFixed(2)
+  }
+  
+  return negocioMasCerca
 }
-module.exports = getKilometers;
+
+module.exports = getDistanciaMinima
